@@ -1,10 +1,8 @@
 version: 0.2
-
 phases:
-  post_build:
+  build:
     commands:
-      - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template-file template-export.yml
+      - cd $CODEBUILD_SRC_DIR; composer install --no-interaction --prefer-dist
 artifacts:
-  type: zip
   files:
-    - template-export.yml
+    - '**/*'
